@@ -1,0 +1,55 @@
+-- Theaho Made Ask for other ones too
+-- Kameee kameeeeee kameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+local pl = game:GetService("Players")
+pl.PlayerAdded:Connect(function(p)
+    p.CharacterAdded:Connect(function(c)
+        if p.Name == "Ryl0P" then
+            local hum = c.Humanoid
+            local torso = c.Torso
+            local back = p.Backpack
+            local kuretool = Instance.new("Tool",back)
+            kuretool.Name = "Kure"
+            kuretool.RequiresHandle = false
+            local nokure = Instance.new("BoolValue",p)
+            nokure.Name = "Nokure"
+            nokure.Value = true
+            local kurecount = Instance.new("IntValue",p)
+            kurecount.Name = "Kurecount"
+            kuretool.Activated:Connect(function()
+                if nokure.Value then
+                    nokure.Value = false
+                    local newparticle = Instance.new("ParticleEmitter",torso)
+                    newparticle.Texture = "rbxassetid://275750184"
+                    newparticle.Color = ColorSequence.new{
+                        ColorSequenceKeypoint.new(0,Color3.fromRGB(170,0,255)),
+                        ColorSequenceKeypoint.new(1,Color3.fromRGB(180,0,255))
+                    }
+                    newparticle.LightEmission = 0.5
+                    newparticle.Acceleration = Vector3.new(0, -15, 0)
+                    newparticle.LockedToPart = true
+                    newparticle.Rotation = NumberRange.new(-45,45)
+                    newparticle.RotSpeed = NumberRange.new(100,100)
+                    newparticle.Speed = NumberRange.new(2.5,5)
+                    newparticle.SpreadAngle = Vector2.new(40,40)
+                    newparticle.Size = NumberSequence.new{
+                        NumberSequenceKeypoint.new(0,3),
+                        NumberSequenceKeypoint.new(1,3.3)
+                    }
+                    hum.MaxHealth *= 1.5
+                    hum.Health *= 1.5
+                    kuretool.ToolTip = "Active!"
+                    wait(60)
+                    newparticle:Destroy()
+                    hum.MaxHealth *= -1.5
+                    kurecount.Value = 20
+                    repeat
+                        wait(1)
+                        kurecount.Value -= 1
+                        kuretool.ToolTip = kurecount.Value
+                    until kurecount.Value <= 0
+                    nokure.Value = true
+                end
+            end)
+        end
+    end)
+end)
